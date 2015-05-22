@@ -1,1 +1,5 @@
-This is a description of what will be done
+Game: Magic Touch
+
+Part 1: Screen, background, fat wizard, other pretty things, set them in place
+Part 2: Enemies dropping from the sky and their full class package
+Part 3: Kill algorithm, looping through the entire array, interactions between them
