@@ -51,4 +51,14 @@ void fillUp(){ //selects whether or not a enemy will be added
     }
   }
 }
+  void keyPressed(){
+    for (int i=0; i<Enemies.length;i++){
+      if (Enemies[i]!=null){
+        if (Enemies[i].NumLetter==key){
+          Enemies[i] = null;}
+      }
+    }
+  }
+    
+
 
