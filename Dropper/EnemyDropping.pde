@@ -25,5 +25,6 @@ void display(){
   textFont(f,36); //the int changes the size
   fill(100); //changes the color
   text(letter,xcor,ycor+50); 
+  
 }
 }
