@@ -30,7 +30,7 @@ void display(){
   textAlign(CENTER);
   textFont(f,36); //the int changes the size
   fill(100); //changes the color
-  text(letter,xcor,ycor); 
+  text(letter,xcor+10,ycor); 
 }
 void DeadDisplay(){
   image(explode, xcor-size/4, ycor-size, size/2, size);
