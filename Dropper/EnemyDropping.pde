@@ -27,6 +27,7 @@ void display(){
   image(img, xcor, ycor, 30, 30); //x, y, width, height
   
   f = createFont("Arial",16,true); // Arial, 16 point, anti-aliasing on
+  textAlign(CENTER);
   textFont(f,36); //the int changes the size
   fill(100); //changes the color
   text(letter,xcor,ycor); 
