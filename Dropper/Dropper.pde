@@ -47,12 +47,19 @@ void draw(){
     }
     for (int i=0; i<Interceptors.length; i++){
       if (Interceptors[i]!=null){
-        Interceptors[i].move(2);
+        Interceptors[i].move(2+score/10);
         Interceptors[i].display();
         if (Interceptors[i].hit()){
           Enemies[i] = null;
           Interceptors[i]=null;
           score++;
+        } else {
+          if (Interceptors[i].Out()){
+            Interceptors[i].cheat();
+            Enemies[i] = null;
+            Interceptors[i] = null;
+            score++;
+          }
         }
       }
     }
@@ -90,7 +97,7 @@ void fillUp(){ //selects whether or not a enemy will be added
   void keyPressed(){
     for (int i=0; i<Enemies.length;i++){
       if (Enemies[i]!=null){
-        if (Enemies[i].NumLetter==key){
+        if (Enemies[i].letter==key){
           //Enemies[i] = null;
           //score++;
           if (Interceptors[i]==null){
@@ -99,7 +106,7 @@ void fillUp(){ //selects whether or not a enemy will be added
         }  
       }
     }
-    if (key==80){
+    if (key=='P'){
       pause = !pause;
     }
   }
@@ -123,6 +130,10 @@ void fillUp(){ //selects whether or not a enemy will be added
       }
     }
   }
+  
+  void HighScore(){
+    String[] lines = loadStrings("file.txt");
+    
         
 
 

@@ -5,6 +5,7 @@ float ycor;
 int NumLetter;//97 = a; 122 = z
 PFont f;
 char letter;
+char BigLetter;
 PImage explode;
 int size = 30;
 
@@ -14,9 +15,11 @@ EnemyDropping(float n){
   //img = loadImage("ABomb.jpg");
   //img = loadImage("fireball.jpg");
   explode = loadImage("explosion.png");
-  NumLetter = (int)random(26)+97;
-  String Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  letter = Alpha.charAt(NumLetter-97);
+  NumLetter = (int)random(26);
+  String Big = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  String Small = "abcdefghijklmnopqrstuvwxyz";
+  BigLetter = Big.charAt(NumLetter);
+  letter = Small.charAt(NumLetter);
 }
 
 void Move(float n){
@@ -30,7 +33,7 @@ void display(){
   textAlign(CENTER);
   textFont(f,36); //the int changes the size
   fill(100); //changes the color
-  text(letter,xcor+10,ycor); 
+  text(BigLetter,xcor+10,ycor); 
 }
 void DeadDisplay(){
   image(explode, xcor-size/4, ycor-size, size/2, size);

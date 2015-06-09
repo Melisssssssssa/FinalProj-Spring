@@ -27,5 +27,13 @@ public class Interceptor{
   void display(){
     image(missile, xcor, ycor, 10, 30);
   }
-  
+  boolean Out(){
+    return (xcor < 100 || xcor > 550 || ycor < 10 || ycor > 600);
+  }
+  void cheat(){
+    xcor = target.xcor + 3;
+    ycor = target.ycor + 2;
+  }
 }
+
+
