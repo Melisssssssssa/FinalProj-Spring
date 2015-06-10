@@ -1,13 +1,13 @@
 class EnemyDropping{
-PImage img; 
-float xcor=0;
-float ycor;
-int NumLetter;//97 = a; 122 = z
-PFont f;
-char letter;
-char BigLetter;
-PImage explode;
-int size = 30;
+  PImage img; 
+  float xcor=0;
+  float ycor;
+  int NumLetter;//97 = a; 122 = z
+  PFont f;
+  char letter;
+  char BigLetter;
+  PImage explode;
+  int size = 30;
 
 EnemyDropping(float n){
   xcor = n;

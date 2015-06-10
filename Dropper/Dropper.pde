@@ -6,6 +6,8 @@ boolean Lose = false;
 PImage ground;
 EnemyDropping Killer = null;
 boolean pause = false;
+String HS;
+boolean newHigh = false;
 
 void setup(){
   size(600,700);
@@ -21,7 +23,13 @@ void draw(){
   } else {
     background(255);
     image(ground, 0, 600, 600, 98);
+    
   if (Lose){ //losing scene
+    if (newHigh){
+    }
+    fill(0);
+    textSize(32);
+    text("High Score:" + HS, 300, 175); 
     fill(0);
     textSize(64);
     textAlign(CENTER);
@@ -69,6 +77,7 @@ void draw(){
           //Enemies[i] = null;
           Lose = true;
           Killer = Enemies[i];
+          HighScore();
           for (int i2=0; i2<Enemies.length; i2++){
             Enemies[i2] = null;
             Interceptors[i2] = null;
@@ -132,8 +141,16 @@ void fillUp(){ //selects whether or not a enemy will be added
   }
   
   void HighScore(){
-    String[] lines = loadStrings("file.txt");
-    
+    String[] lines = loadStrings("HighScore.txt");
+    if (score > int(lines[0])){
+      newHigh = true;
+      lines[0] = str(score);
+      saveStrings("HighScore.txt", lines);
+      HS = str(score);
+    } else {
+      HS = lines[0];
+    } 
+  }
         
 
 
