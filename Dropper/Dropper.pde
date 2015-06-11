@@ -25,11 +25,12 @@ void draw(){
     image(ground, 0, 600, 600, 98);
     
   if (Lose){ //losing scene
-    if (newHigh){
-    }
-    fill(0);
+    fill(0,191,255);
     textSize(32);
-    text("High Score:" + HS, 300, 175); 
+    if (newHigh){
+      text("New High Score:" + HS, 290, 175);
+    } else {
+      text("High Score:" + HS, 300, 175);} 
     fill(0);
     textSize(64);
     textAlign(CENTER);
@@ -49,7 +50,7 @@ void draw(){
     text(score, 10, 30); 
     for (int i=0; i<Enemies.length; i++){
       if (Enemies[i]!=null){
-        Enemies[i].Move((float)1+score/15.0);
+        Enemies[i].Move((float)1+score/15.0);////////////////////////
         Enemies[i].display();
       }
     }
@@ -90,7 +91,7 @@ void draw(){
 }
 
 void fillUp(){ //selects whether or not a enemy will be added
-  if (frameRate % 100 == 0){
+  if (frameRate % (100-score/4) == 0){
     int i=11;
     for (int i2=0; i2<Enemies.length; i2++){
       if (Enemies[i2] == null){
@@ -144,9 +145,9 @@ void fillUp(){ //selects whether or not a enemy will be added
     String[] lines = loadStrings("HighScore.txt");
     if (score > int(lines[0])){
       newHigh = true;
-      lines[0] = str(score);
-      saveStrings("HighScore.txt", lines);
       HS = str(score);
+      lines[0] = HS;
+      saveStrings("HighScore.txt", lines);
     } else {
       HS = lines[0];
     } 
