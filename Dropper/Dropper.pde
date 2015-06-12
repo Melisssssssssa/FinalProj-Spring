@@ -11,7 +11,7 @@ boolean newHigh = false;
 
 void setup(){
   size(600,700);
-  Enemies[0] = new EnemyDropping(random(1)*500);
+  Enemies[0] = new EnemyDropping(random(1)*500, 1);
   ground = loadImage("Ground.png");
 }
 
@@ -59,9 +59,12 @@ void draw(){
         Interceptors[i].move(2+score/10);
         Interceptors[i].display();
         if (Interceptors[i].hit()){
-          Enemies[i] = null;
+          Enemies[i].kill(Interceptors[i].missileChar);
           Interceptors[i]=null;
-          score++;
+          if (Enemies[i].empty()){
+            score++;
+            Enemies[i] = null;
+          }
         } else {
           if (Interceptors[i].Out()){
             Interceptors[i].cheat();
@@ -91,16 +94,28 @@ void draw(){
 }
 
 void fillUp(){ //selects whether or not a enemy will be added
-  if (frameRate % (100-score/4) == 0){
+  if (frameRate % (100-score/2) == 0){
     int i=11;
     for (int i2=0; i2<Enemies.length; i2++){
       if (Enemies[i2] == null){
         i=i2;}
     }
     if (i!=11){
-      Enemies[i] = new EnemyDropping(random(1)*500);
+      Enemies[i] = new EnemyDropping(random(1)*500, 1);
     } else {
-       frameRate -= 10;
+       frameRate -= 1;
+    }
+  }
+  if (frameRate % (100-score/10) == 0){
+    int i=11;
+    for (int i2=0; i2<Enemies.length; i2++){
+      if (Enemies[i2] == null){
+        i=i2;}
+    }
+    if (i!=11){
+      Enemies[i] = new EnemyDropping(random(1)*500, 4);
+    } else {
+       frameRate -= 1;
     }
   }
 }
@@ -111,7 +126,7 @@ void fillUp(){ //selects whether or not a enemy will be added
           //Enemies[i] = null;
           //score++;
           if (Interceptors[i]==null){
-            Interceptors[i] = new Interceptor(Enemies[i]);
+            Interceptors[i] = new Interceptor(Enemies[i], key);
           }
         }  
       }

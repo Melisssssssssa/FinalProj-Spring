@@ -3,9 +3,11 @@ public class Interceptor{
   float xcor = 250;
   float ycor = 600;
   EnemyDropping target;
+  char missileChar;
   
-  public Interceptor(EnemyDropping Enemy){
+  public Interceptor(EnemyDropping Enemy, char c){
     target = Enemy;
+    missileChar = c;
     missile = loadImage("missile.png");
   }
   public boolean hit(){
