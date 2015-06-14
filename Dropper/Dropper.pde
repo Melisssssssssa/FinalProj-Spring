@@ -8,14 +8,43 @@ EnemyDropping Killer = null;
 boolean pause = false;
 String HS;
 boolean newHigh = false;
+int mode;
+boolean begin=false;
 
 void setup(){
   size(600,700);
-  Enemies[0] = new EnemyDropping(random(1)*500, 1);
+  Enemies[0] = new EnemyDropping(random(1)*500);
   ground = loadImage("Ground.png");
 }
 
+void modeIs(){
+  background(255);
+  fill(255);
+  rect(250,150,100,50);
+  fill(0);
+  textSize(32);
+  textAlign(CENTER);
+  text("Easy", 300, 190); 
+  
+  fill(255);
+  rect(240,250,120,50);
+  fill(0);
+  textSize(32);
+  textAlign(CENTER);
+  text("Medium", 300, 290); 
+  
+  fill(250);
+  rect(250,350,100,50);
+  fill(0);
+  textSize(32);
+  textAlign(CENTER);
+  text("Hard", 300, 390); 
+}
+
 void draw(){
+  if (!begin){
+    modeIs();
+  } else {
   if (pause){
     textSize(64);
     textAlign(CENTER);
@@ -59,13 +88,11 @@ void draw(){
         Interceptors[i].move(2+score/10);
         Interceptors[i].display();
         if (Interceptors[i].hit()){
-          Enemies[i].kill(Interceptors[i].missileChar);
+          Enemies[i]=null;
           Interceptors[i]=null;
-          if (Enemies[i].empty()){
-            score++;
-            Enemies[i] = null;
+          score++;
           }
-        } else {
+        else {
           if (Interceptors[i].Out()){
             Interceptors[i].cheat();
             Enemies[i] = null;
@@ -91,29 +118,30 @@ void draw(){
     }//for 
   }//last else; after the if lose
   }//no pause
+  }//modeIs
 }
 
 void fillUp(){ //selects whether or not a enemy will be added
-  if (frameRate % (100-score/2) == 0){
+  if (frameRate % (100-score/2-mode) == 0){
     int i=11;
     for (int i2=0; i2<Enemies.length; i2++){
       if (Enemies[i2] == null){
         i=i2;}
     }
     if (i!=11){
-      Enemies[i] = new EnemyDropping(random(1)*500, 1);
+      Enemies[i] = new EnemyDropping(random(1)*500);
     } else {
        frameRate -= 1;
     }
   }
-  if (frameRate % (100-score/10) == 0){
+  if (frameRate % (100-score/10-mode) == 0){
     int i=11;
     for (int i2=0; i2<Enemies.length; i2++){
       if (Enemies[i2] == null){
         i=i2;}
     }
     if (i!=11){
-      Enemies[i] = new EnemyDropping(random(1)*500, 4);
+      Enemies[i] = new EnemyDropping(random(1)*500);
     } else {
        frameRate -= 1;
     }
@@ -123,8 +151,6 @@ void fillUp(){ //selects whether or not a enemy will be added
     for (int i=0; i<Enemies.length;i++){
       if (Enemies[i]!=null){
         if (Enemies[i].letter==key){
-          //Enemies[i] = null;
-          //score++;
           if (Interceptors[i]==null){
             Interceptors[i] = new Interceptor(Enemies[i], key);
           }
@@ -146,12 +172,25 @@ void fillUp(){ //selects whether or not a enemy will be added
   }
   
   void mousePressed(){
+    if (!begin){
+      if (mouseX-250<100 && mouseY-150<50){
+        begin = true;
+        mode = 0;
+      } else if (mouseX-240<100 && mouseY-250<50){
+        begin = true;
+        mode = 10;
+      } else if (mouseX-250<100 && mouseY-350<50){
+        begin = true;
+        mode = 20;
+      }
+    }
     if (Lose){
       if (mouseX-250<100 && mouseY-350<50){
         Lose = false;
         score = 0;
         frameRate = 0;
         EnemyDropping Killer = null;
+        begin = false;
       }
     }
   }
